@@ -4,23 +4,25 @@ MODE="${1:-debug}"
 ACTION="${2-run}"
 
 if [ "$MODE" = "debug" ]; then
-    BUILD_TYPE="build_debug"
+    BUILD_DIR="build_debug"
     CMAKE_TYPE="Debug"
-elif [ "MODE" = "release" ]; then
-    BUILD_TYPE="build_release"
-    CMAKE_TYPE="Release
+elif [ "$MODE" = "release" ]; then
+    BUILD_DIR="build_release"
+    CMAKE_TYPE="Release"
 else
-    echo "Usage: $0 [debug|release] [run|gdb]
+    echo "Usage: $0 [debug|release] [run|gdb]"
     exit 1
 fi
 
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
+
 cmake -DCMAKE_BUILD_TYPE="$CMAKE_TYPE" ..
 cmake --build . --target mini_parser
+
 cd ..
 
-EXEC="./$BUILD_DIR/LRU"
+EXEC="./$BUILD_DIR/mini_parser"
 if [ "$ACTION" = "run" ]; then
     $EXEC
 elif [ "$ACTION" = "gdb" ]; then

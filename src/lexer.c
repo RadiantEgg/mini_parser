@@ -37,7 +37,7 @@ static char advance(Lexer *lexer)
 
 static void skip_whitespace(Lexer *lexer)
 {
-    while ((unsigned char)isspace(peek(lexer)))
+    while (isspace((unsigned char)peek(lexer)))
         advance(lexer);
 }
 

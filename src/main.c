@@ -4,7 +4,7 @@
 
 int main()
 {
-    const char *input = "12 + 34 - 5";
+    const char *input = "   a1.2 + 0.34 -";
 
     Lexer *lexer = lexer_create(input);
 

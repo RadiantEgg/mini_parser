@@ -1,4 +1,4 @@
-c_minium_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.10)
 
 project(mini_parser)
 
@@ -27,7 +27,7 @@ endif()
 set(INC_DIR include)
 set(SRC_DIR src)
 
-message(STATUS "Inlcude Dir: ${INC_DIR}")
+message(STATUS "Include Dir: ${INC_DIR}")
 message(STATUS "Src Dir: ${SRC_DIR}")
 
 set(SOURCES
