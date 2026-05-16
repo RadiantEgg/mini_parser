@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "parser.h"
 #include "lexer.h"
 #include "token.h"
@@ -10,21 +11,6 @@ static AST *ast_create(void)
     node->left = NULL;
     node->right = NULL;
     return node;
-}
-
-static void advance(Parser *parser)
-{
-    next_token(parser->lexer, &parser->cur);
-}
-
-AST *parse_expression(Lexer *lexer)
-{
-    AST *ast = ast_create();
-    Parser parser;
-    parser.lexer = lexer;
-    advance(&parser);
-    ast = expr(&parser);
-    return ast;
 }
 
 static AST *factor(Parser *parser)
@@ -80,6 +66,24 @@ static AST *expr(Parser *parser)
     }
     return left;
 }
+
+
+static void advance(Parser *parser)
+{
+    next_token(parser->lexer, &parser->cur);
+}
+
+AST *parse_expression(Lexer *lexer)
+{
+    AST *ast = ast_create();
+    Parser parser;
+    parser.lexer = lexer;
+    advance(&parser);
+    ast = expr(&parser);
+    return ast;
+}
+
+
 
 double ast_eval(AST *node)
 {

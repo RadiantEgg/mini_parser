@@ -26,6 +26,11 @@ typedef struct {
 } Parser;
 
 AST *parse_expression(Lexer *lexer);
+static AST *factor(Parser *parser);
+static AST *term(Parser *parser);
+static AST *expr(Parser *parser);
+static void advance(Parser *parser);
+
 
 void ast_free(AST *node);
 

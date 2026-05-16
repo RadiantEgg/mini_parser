@@ -32,6 +32,7 @@ message(STATUS "Src Dir: ${SRC_DIR}")
 
 set(SOURCES
     ${SRC_DIR}/main.c
+    ${SRC_DIR}/parser.c
     ${SRC_DIR}/lexer.c
     ${SRC_DIR}/token.c
 )
