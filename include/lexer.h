@@ -3,15 +3,15 @@
 
 #include "token.h"
 
-// opaque struct
+/* lexer 是一个字符流状态记录器，记录字符流 char *input 和当前位置 */
+
 typedef struct Lexer Lexer;
 
-// 创建词法解析器
+/* 记录器 */
 Lexer *lexer_create(const char *input);
-// 销毁词法解析器
 void lexer_destroy(Lexer *lexer);
 
-// 获取下一个token
+/* 核心==获取下一个token */
 int next_token(Lexer *lexer, Token *token);
 
 #endif

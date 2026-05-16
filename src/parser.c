@@ -67,12 +67,14 @@ static AST *expr(Parser *parser)
     return left;
 }
 
-
+/* 改变状态机parser的状态：在判断并消耗当前token之后获取新的token，即token流向前移动 */
 static void advance(Parser *parser)
 {
     next_token(parser->lexer, &parser->cur);
 }
 
+
+/* 创建根树和状态机 */
 AST *parse_expression(Lexer *lexer)
 {
     AST *ast = ast_create();

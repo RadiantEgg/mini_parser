@@ -8,7 +8,7 @@ struct Lexer {
     int pos;
 };
 
-Lexer *lexer_create(const char *input)
+Lexer *lexer_create(const char *input)  /* 创建记录器 */
 {
     Lexer *lexer = malloc(sizeof(Lexer));
     
@@ -24,7 +24,7 @@ void lexer_destroy(Lexer *lexer)
 }
 
 // 工具函数
-static char peek(Lexer *lexer)
+static char peek(Lexer *lexer)  /* 查看字符流当前字符 */
 {
     if (lexer->input[lexer->pos] == '\0') {
         return '\0';
@@ -33,18 +33,18 @@ static char peek(Lexer *lexer)
     }
 }
 
-static char advance(Lexer *lexer)
+static char advance(Lexer *lexer)   /* 消耗字符并向前移动一个字符 */
 {
     return lexer->input[lexer->pos++];
 }
 
-static void skip_whitespace(Lexer *lexer)
+static void skip_whitespace(Lexer *lexer)   /* 跳过空白字符 */
 {
     while (isspace((unsigned char)peek(lexer)))
         advance(lexer);
 }
 
-static int read_number(Lexer *lexer, Token *token)
+static int read_number(Lexer *lexer, Token *token)  /* 读取数字 */
 {
     double val = 0;
 
@@ -74,6 +74,7 @@ static int read_number(Lexer *lexer, Token *token)
     return 1;
 }
 
+/* 在字符流中回去下一个非空token并记录在token指针中 */
 int next_token(Lexer *lexer, Token *token)
 {
     skip_whitespace(lexer);
