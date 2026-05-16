@@ -18,16 +18,19 @@ Lexer *lexer_create(const char *input)
     return lexer;
 }
 
-Lexer *lexer_destroy(Lexer *lexer)
+void lexer_destroy(Lexer *lexer)
 {
     free(lexer);
-    lexer = NULL;
 }
 
 // 工具函数
 static char peek(Lexer *lexer)
 {
-    return lexer->input[lexer->pos];
+    if (lexer->input[lexer->pos] == '\0') {
+        return '\0';
+    } else {
+        return lexer->input[lexer->pos];
+    }
 }
 
 static char advance(Lexer *lexer)
@@ -48,7 +51,6 @@ static int read_number(Lexer *lexer, Token *token)
     // 必须以数字开头
     if (!isdigit((unsigned char)peek(lexer))) {
         token->type = TOKEN_ERROR;
-        snprintf(token->error, ERROR_MSG_BUFF_SIZE, "invalid number");
         return 0;
     }
     
@@ -95,9 +97,29 @@ int next_token(Lexer *lexer, Token *token)
         token->type = TOKEN_MINUS;
         return 1;
     }
+    if (c == '*') {
+        advance(lexer);
+        token->type = TOKEN_MUL;
+        return 1;
+    }
+    if (c == '/') {
+        advance(lexer);
+        token->type = TOKEN_DIV;
+        return 1;
+    }
+    if (c == '(') {
+        advance(lexer);
+        token->type = TOKEN_LPAREN;
+        return 1;
+    }
+    if (c == ')') {
+        advance(lexer);
+        token->type = TOKEN_RPAREN;
+        return 1;
+    }
 
     advance(lexer);
     token->type = TOKEN_ERROR;
-    snprintf(token->error, ERROR_MSG_BUFF_SIZE, "unknown char: %c", c);
+    token->value = c;
     return 0;
 }

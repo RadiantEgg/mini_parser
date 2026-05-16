@@ -5,7 +5,7 @@ void print_token(const Token *token)
 {
     switch(token->type) {
         case TOKEN_NUMBER:
-            printf("NUMBER: %f\n", token->value);
+            printf("NUMBER: %.2f\n", token->value);
             break;
         case TOKEN_PLUS:
             printf("+\n");
@@ -14,7 +14,7 @@ void print_token(const Token *token)
             printf("-\n");
             break;
         case TOKEN_ERROR:
-            printf("ERROR: %s\n", token->error);
+            printf("LEXER ERROR\n");
             break;
         case TOKEN_EOF:
             printf("EOF\n");

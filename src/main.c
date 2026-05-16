@@ -15,12 +15,9 @@ int main()
         int ok = next_token(lexer, &token);
 
         print_token(&token);
-        if (token.type == TOKEN_EOF)
+
+        if (token.type == TOKEN_EOF || token.type == TOKEN_ERROR)
             break;
-        if (token.type == TOKEN_ERROR) {
-            printf("LEXER ERROR\n");
-            break;
-        }
     }
     lexer_destroy(lexer);
     return 0;
