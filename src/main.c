@@ -5,7 +5,7 @@
 
 int main()
 {
-    const char *input = "  1.5  *( 2 / 3 *(1 + 2) )";
+    const char *input = "6 +   2 * 1.5  *( 2 / 3 *(1 + 2) )";
 
     Lexer *lexer = lexer_create(input);
 
